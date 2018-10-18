@@ -1,5 +1,5 @@
 /*
-Template Name: Material Pro Admin
+Template Name: Admin Press Admin
 Author: Themedesigner
 Email: niravjoshi87@gmail.com
 File: scss
@@ -169,17 +169,21 @@ File: scss
     position: relative;
     margin-bottom: 10px;
     .comment-row {
-        border-left: 3px solid $white;
+        border-bottom:1px solid $border;
         padding: 15px;
+        &:last-child{
+            border-bottom:0px;
+        }
         &:hover,
         &.active {
-            border-color: $themecolor;
+            background:$bglight;
         }
     }
 }
 
 .comment-text {
     padding: 15px 15px 15px 20px;
+    width:80%;
     &:hover .comment-footer,
     &.active .comment-footer {
         .action-icons {
@@ -188,7 +192,9 @@ File: scss
     }
     p {
         max-height: 50px;
+        width:100%;
         overflow: hidden;
+        
     }
 }
 
@@ -196,7 +202,7 @@ File: scss
     .action-icons {
         visibility: hidden;
         a {
-            padding-left: 15px;
+            padding-left: 7px;
             vertical-align: middle;
             color: $muted;
             &:hover,
@@ -279,19 +285,34 @@ File: scss
             display: inline-block;
             padding-left: 15px;
             h5 {
-                color: $muted;
+                color: $dark;
             }
             .box {
                 display: inline-block;
                 margin-bottom: 10px;
-                color:$dark;
+                position:relative;
+                &:after{
+                    right: 99%;
+                    top: 0;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                    border-top-color: $light-info;
+                    border-width: 8px;
+                    margin-left: -1px;
+                    border-right-color: $light-info    
+                }
             }
         }
         .chat-time {
-            display: inline-block;
+            display: block;
             text-align: right;
             width: 80px;
-            font-size: 13px;
+            margin-left:28px;
+            font-size: 10px;
             color: $muted;
         }
         &.odd {
@@ -301,6 +322,7 @@ File: scss
             }
             .box {
                 clear: both;
+
             }
         }
         &.odd + .odd {
@@ -308,8 +330,19 @@ File: scss
         }
         &.reverse {
             text-align: right;
+            .box{
+                &:after{
+                        left:99%;
+                        right:auto;
+                        border-right-color:transparent;
+                        border-left-color:$light-inverse;
+                        border-top-color:$light-inverse;
+                }    
+            }
             .chat-time {
-                text-align: left;
+                text-align: right;
+                margin-left:auto;
+                margin-right:65px;
             }
             .chat-content {
                 padding-left: 0px;
@@ -385,7 +418,7 @@ File: scss
             }
             .mail-contnet {
                 display: inline-block;
-                width: 75%;
+                width: 73%;
                 vertical-align: middle;
                 h5 {
                     margin: 5px 0px 0;
@@ -802,8 +835,10 @@ File: scss
 
 .profiletimeline {
     position: relative;
-    margin-left: 70px;
+    padding-left: 40px;
     margin-right: 10px;
+    border-left:1px solid $border;
+    margin-left:30px;
     .sl-left {
         float: left;
         margin-left: -60px;
