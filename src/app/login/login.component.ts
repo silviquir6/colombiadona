@@ -3,8 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/usuario/usuario.service';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
-import { runInThisContext } from 'vm';
-import { windowTime } from 'rxjs/operators';
+
 
 declare const gapi: any;
 
@@ -24,6 +23,7 @@ export class LoginComponent implements OnInit {
 constructor(public usuarioService: UsuarioService, public router: Router  ) { }
 
 ngOnInit() {
+  console.log('ngOnInit');
 this.googleInit();
   this.email = localStorage.getItem('email') || '';
 if (this.email.length > 1)
@@ -46,7 +46,7 @@ if (this.email.length > 1)
 
 }
 googleInit(){
-
+console.log('googleInit');
   gapi.load('auth2', ()=>{
 this.auth2= gapi.auth2.init({
   client_id : '84232656315-ts6019vflkr7017j6856imc395lrsclq.apps.googleusercontent.com',
@@ -60,12 +60,19 @@ this.attachSignIn(document.getElementById('btnGoogle'));
 }
 
 attachSignIn(element){
+  console.log('attachSignIn');
 this.auth2.attachClickHandler(element, {}, (googleUser) =>{
+  console.log('attachClickHandler');
 
-let token=googleUser.getAuthResponse().id_token;
+let token = googleUser.getAuthResponse().id_token;
+console.log('token',token);
+
 this.usuarioService.loginGoogle(token)
-            .subscribe(correcto=>{
-             window.location.href= '#/dashboard';
+            .subscribe(correcto =>{
+              console.log('login google correcto');
+             window.location.href = '#/dashboard';
+             /* this.router.navigate(['/dashboard']);
+ */
           });
 } );
 

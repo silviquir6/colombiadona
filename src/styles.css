@@ -3,3 +3,14 @@
 .pointer {
     cursor: pointer;
 }
+
+.circle-img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    float: right;
+}
+
+.gray {
+    color: gray;
+}

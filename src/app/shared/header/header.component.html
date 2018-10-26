@@ -3,7 +3,7 @@
         <!-- ============================================================== -->
         <!-- Logo -->
         <!-- ============================================================== -->
-        <div class="navbar-header animated fadeIn">
+        <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
                 <!-- Logo icon -->
                 <b>
@@ -39,12 +39,41 @@
                         <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
                 </li>
             </ul>
-            <!-- ============================================================== -->
-            <!-- User profile and search -->
-            <!-- ============================================================== -->
-            <!-- <ul class="navbar-nav my-lg-0">
-                <li class="nav-item"> <a href="https://wrappixel.com/templates/elite-angular-admin/" target="_blank" class="btn btn-info text-white">Upgrade To Pro</a> </li>
-            </ul> -->
+            <ul class="navbar-nav my-lg-0">
+                <li class="nav-item">
+                    <!-- User profile -->
+                    <div class="">
+                        <!-- User profile image -->
+                        <div> <img class="circle-img" [src]="usuario.img | imagen" alt="user" />
+
+                        </div>
+                        <!-- Default dropleft button -->
+                        <div class="btn-group dropleft">
+                            <a href="#" class="dropdown-toggle  gray" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                            {{usuario.nombre}}<i class="fa "></i></a>
+                            <div class="dropdown-menu animated flipInY">
+                                <!-- text-->
+                                <a routerLinkActive="active" routerLink="/perfil" class="dropdown-item"> Mi Perfil</a>
+                                <!-- text-->
+                                <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                                <!-- text-->
+                                <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                                <!-- text-->
+                                <div class="dropdown-divider"></div>
+                                <!-- text-->
+                                <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                                <!-- text-->
+                                <div class="dropdown-divider"></div>
+                                <!-- text-->
+                                <a (click)="usuarioService.logout()" class="pointer dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                                <!-- text-->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </li>
+            </ul>
         </div>
     </nav>
 </header>

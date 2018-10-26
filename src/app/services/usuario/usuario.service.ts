@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from 'src/app/config/config';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import swal from 'sweetalert';
+import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor( public http: HttpClient, public router:Router) {
+//se inyectan los servicios:
+  constructor( public http: HttpClient, public router:Router, public subirArchivoService: SubirArchivoService) {
 
 this.cargarStorage();
   }
@@ -54,12 +56,13 @@ localStorage.removeItem('usuario');
 this.router.navigate(['/login']);
 
 }
-  loginGoogle(token: string) {
+
+loginGoogle(token: string) {
     let url = URL_SERVICIOS + '/login/google';
     return this.http.post(url, { token })
     .pipe(map((resp: any) => {
 
-      console.log(resp);
+     console.log('loginGoogle resp : ', resp);
      this.guardarStorage(resp.id, resp.token, resp.usuario);
      return true;
     }));
@@ -98,6 +101,44 @@ this.router.navigate(['/login']);
 
     }));
 
+  }
+
+actualizarUsuario(usuario: Usuario) {
+
+    let url = URL_SERVICIOS + '/usuario/' + usuario._id;
+    url += '?token=' + this.token;
+    console.log(url);
+    return  this.http.put(url, usuario)
+    .pipe(map((resp:any)=>{
+
+
+     let usuarioDB : Usuario = resp.usuario;
+
+      this.guardarStorage( resp.id, this.token, usuarioDB );
+      swal("Usuario Actualizado", usuario.nombre, "success");
+
+      console.log('actualizarUsuario',resp);
+
+      return true;
+
+    }));
+
+  }
+
+  cambiarImagen(archivo: File, id: string) {
+
+    //llamar el metodo de subir archivo que regresa una promesa:
+
+    this.subirArchivoService.subirArchivo(archivo, 'usuarios', id)
+      .then((resp : any) => {
+        this.usuario.img = resp.usuario.img;
+        this.guardarStorage( resp.id, this.token, this.usuario );
+        swal("Imagen actualizada", this.usuario.nombre, "success");
+
+      })
+      .catch(resp => {
+        console.log(resp);
+      });
   }
 
 

@@ -1,0 +1,80 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <div class="row">
+
+                    <!-- Column -->
+                    <!-- Column -->
+
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Tab panes -->
+                            <div class="card-body color-table">
+                                <div class="card-body">
+                                    <h4 class="card-title">Actualizar fotografia del usuario </h4>
+                                    <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="img-circle center " width="150" />
+                                    <img *ngIf="imagenTemp" [src]="imagenTemp" class="img-circle center " width="150" />
+                                </div>
+
+                                <input (change)="seleccionImage($event.target.files[0])" type="file">
+                                <br>
+                                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10">
+                                        <i class='fa fa-save'></i>Actualizar Foto</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+
+
+
+                <div class="col-lg-8 col-xlg-9 col-md-7">
+                    <div class="card">
+                        <!-- Tab panes -->
+                        <div class="card-body">
+                            <div class="card-body">
+                                <h4 class="card-title">Perfil del usuario </h4>
+                                <h6 class="card-subtitle"></h6>
+                                <form ngNativeValidate [formGroup]="forma" class="form p-t-20" (ngSubmit)="actualizarDatos()">
+                                    <div class="form-group">
+                                        <label for="exampleInputuname">Nombre </label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                                            <input formControlName="nombre" name="nombre" type="text" class="form-control" id="exampleInputuname" placeholder="nombre">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Correo Electrónico</label>
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                                            <input formControlName="correo" [disabled]="usuario.google" name="correo" type="email" class="form-control" id="exampleInputEmail1" placeholder="Correo electrónico">
+                                        </div>
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-block btn-success waves-effect waves-light m-r-10">
+                                          <i class='fa fa-save'></i>Guardar</button>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+            </div>
+            <!-- Row -->
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+
+</div>

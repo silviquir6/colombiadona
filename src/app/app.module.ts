@@ -26,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoginComponent,
     NopagefoundComponent,
-    RegisterComponent
+    RegisterComponent,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
