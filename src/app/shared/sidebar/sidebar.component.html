@@ -17,7 +17,7 @@
                   {{usuario.nombre}}<i class="fa fa-angle-down"></i></a>
                 <div class="dropdown-menu animated flipInY">
                     <!-- text-->
-                    <a routerLinkActive="active" routerLink="/perfil" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                    <a routerLinkActive="active" routerLink="/perfil" class="dropdown-item"><i class="ti-user"></i> Mi perfil</a>
                     <!-- text-->
                     <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
                     <!-- text-->
@@ -25,7 +25,7 @@
                     <!-- text-->
                     <div class="dropdown-divider"></div>
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                    <a routerLinkActive="active" routerLink="/account-settings" class="dropdown-item"><i class="ti-settings"></i>Configuración</a>
                     <!-- text-->
                     <div class="dropdown-divider"></div>
                     <!-- text-->
@@ -36,74 +36,27 @@
         </div>
         <!-- End User profile text-->
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-                <li class="nav-devider"></li>
-                <li class="nav-small-cap">PERSONAL</li>
-                <li [class.active]="showMenu === 'start'">
-                    <a routerLink="/starter" (click)="addExpandClass('start')"><i class="icon-speedometer"></i><span
-              class="hide-menu">Starter Page</span></a>
-                </li>
-                <li class="nav-small-cap">UI COMPONENTS</li>
-                <li>
-                    <a><i
-              class="mdi mdi-equal"></i><span class="hide-menu">Accordion</span></a>
-                </li>
-                <li>
-                    <a><i class="mdi mdi-message-bulleted"></i><span
-              class="hide-menu">Alert</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-view-carousel"></i><span class="hide-menu">Carousel</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-calendar-clock"></i><span class="hide-menu">Datepicker</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-arrange-bring-to-front"></i><span class="hide-menu">Dropdown - Collapse</span></a>
-                </li>
-                <li>
-                    <a><i class="mdi mdi-tablet"></i><span
-              class="hide-menu">Modal</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-backburger"></i><span class="hide-menu">Pagination</span></a>
-                </li>
-                <li>
-                    <a><i class="mdi mdi-image-filter-vintage"></i><span
-              class="hide-menu">Popover & Tooltip</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-poll"></i><span class="hide-menu">Progressbar</span></a>
-                </li>
-                <li>
-                    <a><i class="mdi mdi-bandcamp"></i><span
-              class="hide-menu">Ratings</span></a>
-                </li>
-                <li>
-                    <a><i class="mdi mdi-sort-variant"></i><span
-              class="hide-menu">Tabs</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-calendar-clock"></i><span class="hide-menu">Timepicker</span></a>
-                </li>
-                <li>
-                    <a><i
-              class="mdi mdi-blur-radial"></i><span class="hide-menu">Typehead</span></a>
-                </li>
 
-                <li class="m-t-40 p-20 upgrade-btn">
-                    <a href="https://wrappixel.com/templates/elite-angular-admin/" target="_blank" class="btn btn-danger text-white">Upgrade
-            To Pro</a>
-                </li>
-            </ul>
+
+        <nav class="sidebar-nav">
+            <li *ngFor="let menu of sidebarService.menu">
+                <ul id="sidebarnav">
+
+
+                    <li *ngFor="let submenu of menu.submenu">
+                        <a routerLinkActive="active" routerLink={{submenu.url}} class="button btn-circle btn-block">{{submenu.titulo}}</a>
+
+
+                    </li>
+
+                </ul>
+            </li>
         </nav>
+
+
+
+
+
         <!-- End Sidebar navigation -->
     </div>
     <!-- End Sidebar scroll-->

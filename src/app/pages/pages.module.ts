@@ -15,6 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { appRouting_pages } from './pages.routes';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 
@@ -24,7 +27,11 @@ import { CommonModule } from '@angular/common';
     Graficas1Component,
     ProgressComponent,
     PagesComponent,
-    ProfileComponent
+    ProfileComponent,
+    AccountSettingsComponent,
+    PromesasComponent,
+    RxjsComponent
+
   ],
   exports:[
     DashboardComponent,

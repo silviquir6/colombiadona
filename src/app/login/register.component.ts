@@ -52,11 +52,11 @@ export class RegisterComponent implements OnInit {
     }, { validators: this.sonIguales('password', 'password2') });
 
     this.forma.setValue({
-      nombre: 'Silvia',
-      correo: 'silviquir6@gmail.com',
-      password: '123456',
-      password2: '123456',
-      condiciones: true
+      nombre: '',
+      correo: '',
+      password: '',
+      password2: '',
+      condiciones: false
     })
   }
 

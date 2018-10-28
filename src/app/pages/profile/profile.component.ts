@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(public usuarioService: UsuarioService) {
     this.usuario = this.usuarioService.usuario;
-    console.log('usuario constructor', this.usuario)
+    //console.log('usuario constructor', this.usuario)
   }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
     }
     this.usuarioService.actualizarUsuario(this.usuario)
       .subscribe(res => {
-        console.log(res);
+       // console.log(res);
 
       });
 
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this.imagenSubir = archivo;
-    console.log(archivo);
+    //console.log(archivo);
 
 let reader= new FileReader();
 let urlImgTemp= reader.readAsDataURL(archivo);

@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { appRouting_pages } from '../pages/pages.routes';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { appRouting_pages } from '../pages/pages.routes';
     SidebarComponent,
     BreadcrumbsComponent
   ],
-  imports: [PipesModule, appRouting_pages]
+  imports: [PipesModule, appRouting_pages, CommonModule]
 
 })
 

@@ -1,9 +1,22 @@
 <!-- ============================================================== -->
 <!-- Bread crumb and right sidebar toggle -->
 <!-- ============================================================== -->
+<!-- <div class="row page-titles">
+    <div class="col-md-5 align-self-center">
+      <h4 class="m-b-0 m-t-0">{{pageInfo?.title}}</h4>    </div>
+</div> -->
+
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="m-b-0 m-t-0"></h4>
+        <h4 class="text-themecolor">{{titulo}}</h4>
+    </div>
+    <div class="col-md-7 align-self-center text-right">
+        <div class="d-flex justify-content-end align-items-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active">{{titulo}}</li>
+            </ol>
+        </div>
     </div>
 </div>
 <!-- ============================================================== -->
