@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: 'perfil', component: ProfileComponent , data: {titulo: 'perfil'} },
       { path: 'promesas', component: PromesasComponent , data: {titulo: 'promesas'} },
       { path: 'rxjs', component: RxjsComponent  , data: {titulo: 'rxjs'}},
+      { path: 'usuarios', component: UsuariosComponent  , data: {titulo: 'Mantenimiento de usuarios'}},
       { path: 'account-settings', component: AccountSettingsComponent , data: {titulo: 'accountSettings'} },
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 

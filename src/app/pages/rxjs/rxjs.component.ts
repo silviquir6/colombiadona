@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ObserveOnOperator } from 'rxjs/internal/operators/observeOn';
-import { clearInterval } from 'timers';
-
 
 @Component({
   selector: 'app-rxjs',
@@ -11,7 +7,8 @@ import { clearInterval } from 'timers';
 })
 export class RxjsComponent implements OnInit {
 
-  constructor() {/* 
+  constructor() {
+    /*
     let obs = new Observable(observer=>{
       let contador=0;
       let intervalo= setInterval(()=>{

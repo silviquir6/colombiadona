@@ -9,6 +9,10 @@ import { interval } from 'rxjs';
 })
 export class PromesasComponent implements OnInit {
 
+  ngOnInit(): void {
+    throw new Error("Method not implemented.");
+  }
+
   constructor() {
 
     this.contarTres().then(
@@ -19,7 +23,7 @@ export class PromesasComponent implements OnInit {
 
   }
 
-  contarTres(): Promise<boolean> {
+ contarTres(): Promise<boolean> {
 
     return new Promise((resolve, reject) => {
 
@@ -30,19 +34,13 @@ export class PromesasComponent implements OnInit {
         contador += 1;
         console.log(contador);
         if (contador === 3) {
-          resolve('OK');
+          resolve(true);
           clearInterval(intervalo);
         }
 
       }, 1000);
 
     });
-
-
-
   }
-
-
-
 
 }

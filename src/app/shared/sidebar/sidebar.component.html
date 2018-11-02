@@ -42,6 +42,7 @@
             <li *ngFor="let menu of sidebarService.menu">
                 <ul id="sidebarnav">
 
+                    <a class="gray" href="">{{menu.titulo}}</a>
 
                     <li *ngFor="let submenu of menu.submenu">
                         <a routerLinkActive="active" routerLink={{submenu.url}} class="button btn-circle btn-block">{{submenu.titulo}}</a>

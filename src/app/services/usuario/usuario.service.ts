@@ -16,76 +16,75 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-//se inyectan los servicios:
-  constructor( public http: HttpClient, public router:Router, public subirArchivoService: SubirArchivoService) {
+  //se inyectan los servicios:
+  constructor(public http: HttpClient, public router: Router, public subirArchivoService: SubirArchivoService) {
 
-this.cargarStorage();
+    this.cargarStorage();
   }
 
-  estaLogueado(){
-return (this.token.length > 5 ) ? true : false;
+  estaLogueado() {
+    return (this.token.length > 5) ? true : false;
 
   }
-  cargarStorage(){
+  cargarStorage() {
 
-    if(localStorage.getItem('token')){
-      this.token= localStorage.getItem('token');
-      this.usuario= JSON.parse( localStorage.getItem('usuario'));
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+      this.usuario = JSON.parse(localStorage.getItem('usuario'));
     }
-    else{
-      this.token='';
-      this.usuario= null;
+    else {
+      this.token = '';
+      this.usuario = null;
     }
 
   }
- guardarStorage(id:string, token:string, usuario: Usuario){
-  localStorage.setItem('id',  id );
-  localStorage.setItem('token',  token );
-  localStorage.setItem('usuario', JSON.stringify( usuario) );
+  guardarStorage(id: string, token: string, usuario: Usuario) {
+    localStorage.setItem('id', id);
+    localStorage.setItem('token', token);
+    localStorage.setItem('usuario', JSON.stringify(usuario));
 
-  this.usuario= usuario;
-  this.token=token;
- }
+    this.usuario = usuario;
+    this.token = token;
+  }
 
-logout(){
-this.usuario= null;
-this.token= '';
-localStorage.removeItem('token');
-localStorage.removeItem('usuario');
+  logout() {
+    this.usuario = null;
+    this.token = '';
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
 
-this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
 
-}
+  }
 
-loginGoogle(token: string) {
+  loginGoogle(token: string) {
     let url = URL_SERVICIOS + '/login/google';
     return this.http.post(url, { token })
-    .pipe(map((resp: any) => {
+      .pipe(map((resp: any) => {
 
-     console.log('loginGoogle resp : ', resp);
-     this.guardarStorage(resp.id, resp.token, resp.usuario);
-     return true;
-    }));
+        console.log('loginGoogle resp : ', resp);
+        this.guardarStorage(resp.id, resp.token, resp.usuario);
+        return true;
+      }));
 
   }
-  login(usuario: Usuario, recuerdame: boolean= false) {
+  login(usuario: Usuario, recuerdame: boolean = false) {
 
 
-    if (recuerdame)
-    {
-      localStorage.setItem('email', usuario.email );
+    if (recuerdame) {
+      localStorage.setItem('email', usuario.email);
     }
     else {
       localStorage.removeItem('email');
     }
     let url = URL_SERVICIOS + '/login';
-    return  this.http.post(url, usuario)
-    .pipe(map((resp: any ) => {
-      //console.log(resp);
-      this.guardarStorage(resp.id, resp.token, resp.usuario);
-      return true;
+    return this.http.post(url, usuario)
+      .pipe(map((resp: any) => {
+        //console.log(resp);
+        this.guardarStorage(resp.id, resp.token, resp.usuario);
+        return true;
 
-    }));
+      }));
 
   }
 
@@ -93,35 +92,38 @@ loginGoogle(token: string) {
   crearUsuario(usuario: Usuario) {
 
     let url = URL_SERVICIOS + '/usuario';
-    return  this.http.post(url, usuario)
-    .pipe(map((resp:any)=>{
-      swal("Usuario Creado", usuario.email, "success");
-      console.log(resp);
-      return resp.usuario;
+    return this.http.post(url, usuario)
+      .pipe(map((resp: any) => {
+        swal("Usuario Creado", usuario.email, "success");
+        console.log(resp);
+        return resp.usuario;
 
-    }));
+      }));
 
   }
 
-actualizarUsuario(usuario: Usuario) {
+  actualizarUsuario(usuario: Usuario) {
 
     let url = URL_SERVICIOS + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
     console.log(url);
-    return  this.http.put(url, usuario)
-    .pipe(map((resp:any)=>{
+    return this.http.put(url, usuario)
+      .pipe(map((resp: any) => {
 
+        if (usuario._id === this.usuario._id) {
 
-     let usuarioDB : Usuario = resp.usuario;
+          let usuarioDB: Usuario = resp.usuario;
 
-      this.guardarStorage( resp.id, this.token, usuarioDB );
-      swal("Usuario Actualizado", usuario.nombre, "success");
+          this.guardarStorage(resp.id, this.token, usuarioDB);
+        }
 
-      console.log('actualizarUsuario',resp);
+        swal("Usuario Actualizado", usuario.nombre, "success");
 
-      return true;
+        console.log('actualizarUsuario', resp);
 
-    }));
+        return true;
+
+      }));
 
   }
 
@@ -130,9 +132,9 @@ actualizarUsuario(usuario: Usuario) {
     //llamar el metodo de subir archivo que regresa una promesa:
 
     this.subirArchivoService.subirArchivo(archivo, 'usuarios', id)
-      .then((resp : any) => {
+      .then((resp: any) => {
         this.usuario.img = resp.usuario.img;
-        this.guardarStorage( resp.id, this.token, this.usuario );
+        this.guardarStorage(resp.id, this.token, this.usuario);
         swal("Imagen actualizada", this.usuario.nombre, "success");
 
       })
@@ -140,6 +142,39 @@ actualizarUsuario(usuario: Usuario) {
         console.log(resp);
       });
   }
+
+  cargarUsuarios(desde: number = 0) {
+
+    let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
+
+  buscarUsuario(termino: string) {
+
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
+    return this.http.get(url).pipe(map((resp: any) => resp.usuarios
+    ));
+
+  }
+  borrarUsuario(id: string) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    url += '?token=' + this.token;
+
+    return this.http.delete(url)
+      .pipe(
+        map(
+          (resp: any) =>
+{
+            swal("Usuario borrado", "El usuario ha sido eliminado correctamente", "success");
+    return true;
+  }
+   ) );
+
+
+
+
+  }
+
 
 
 }
