@@ -6,12 +6,13 @@ import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { RegisterComponent } from './login/register.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ForgetpasswordComponent } from './login/forgetpassword.component';
+import { ResetpasswordComponent } from './login/resetpassword.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     LoginComponent,
     NopagefoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgetpasswordComponent,
+    ResetpasswordComponent
 
   ],
   providers: [],

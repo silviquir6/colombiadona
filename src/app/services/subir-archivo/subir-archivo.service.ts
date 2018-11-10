@@ -26,12 +26,12 @@ export class SubirArchivoService {
       if (xhr.readyState === 4) {
 //correctamente
         if (xhr.status === 200) {
-          console.log('imagen subida');
+          //console.log('imagen subida');
           //si se sube llama al resolve
           //JSON en vez de string
           resolve(JSON.parse( xhr.response));
         } else {
-          console.log('fallo la subida');
+         // console.log('fallo la subida');
           reject(xhr.response);
         }
       }

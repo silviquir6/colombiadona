@@ -16,17 +16,18 @@ export class ProfileComponent implements OnInit {
   //archivo imagen a subir:
   imagenSubir: File;
   imagenTemp: string;
+  areYouFromGoogle: boolean = this.usuarioService.usuario.google;
+
 
   constructor(public usuarioService: UsuarioService) {
     this.usuario = this.usuarioService.usuario;
-    //console.log('usuario constructor', this.usuario)
   }
 
   ngOnInit() {
 
     this.forma = new FormGroup({
       nombre: new FormControl(null, Validators.required),
-      correo: new FormControl(null, [Validators.required, Validators.email])
+      correo: new FormControl({value: '', disabled: this.areYouFromGoogle}, [Validators.required, Validators.email])
 
 
     });
@@ -36,6 +37,8 @@ export class ProfileComponent implements OnInit {
       correo: this.usuario.email
 
     });
+
+    console.log('usuario GOOGLE', this.usuario);
   }
   actualizarDatos() {
 
